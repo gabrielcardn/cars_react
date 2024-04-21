@@ -1,0 +1,32 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px auto;
+  grid-template-columns: 100px auto;
+  /* Duas linhas de altura automática */
+  grid-template-areas:
+    "header header"
+    "sidebar content";
+  /* Duas colunas */
+  /* Espaçamento entre as células */
+  /* Borda para visualização */
+}
+
+.header {
+  background-color: aqua;
+  grid-row: 1;
+  grid-area: header;
+}
+
+.main {
+  background-color: aquamarine;
+}
+
+.sideBar {
+  background-color: azure;
+}
+
+.content {
+  background-color: beige;
+}
