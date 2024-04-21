@@ -2,65 +2,88 @@
 import Header from "@/components/Header/Header";
 import styles from "./page.module.css";
 
-import VehicleList from "@/components/VehicleList";
+import { useState } from "react";
+import SideBar from "@/components/SideBar/SideBar";
+import Content from "@/components/Content/Content";
+import carsData from "../contents/CarsContent/cars.json"
 
-const vehiclesData = [
-  {
+const itemsByPage = {
+  "home": [
+    {
+      id: "item1",
+      title: "Item 1",
+    }, {
+      id: "item2",
+      title: "Item 2",
+    }, {
+      id: "item3",
+      title: "Item 3",
+    },
+  ],
+  "cars": [
+    {
+      id: "cars1",
+      title: "Carros 01"
+    }
+  ]
+}
 
-    "id": 1,
-    "timestamp_cadastro": 1696539488,
-    "modelo_id": 12,
-    "ano": 2015,
-    "combustivel": "FLEX",
-    "num_portas": 4,
-    "cor": "BEGE",
-    "nome_modelo": "ONIX PLUS",
-    "valor": 50.000
-  },
-  {
-
-    "id": 2,
-    "timestamp_cadastro": 1696531234,
-    "modelo_id": 14,
-    "ano": 2014,
-    "combustivel": "FLEX",
-    "num_portas": 4,
-    "cor": "AZUL",
-    "nome_modelo": "JETTA",
-    "valor": 49.000
-  },
-  {
-
-    "id": 3,
-    "timestamp_cadastro": 16965354321,
-    "modelo_id": 79,
-    "ano": 1993,
-    "combustivel": "DIESEL",
-    "num_portas": 4,
-    "cor": "AZUL",
-    "nome_modelo": "HILLUX SW4",
-    "valor": 47.500
-  }
-]
 export default function Home() {
+  const [page, setPage] = useState("home")
+  const [content, setContent] = useState(null)
+  const [pageItems, setPageItems] = useState(itemsByPage[page])
+  // TODO: MAKE PERSISTENCE ON SERVER
+  const [cars, setCars] = useState(carsData)
 
   const handleHeaderClick = (itemId) => {
-    alert(itemId)
+    if (itemId) {
+      setPage(itemId)
+      let foundContent = itemsByPage[itemId][0]
+      setContent(foundContent.id)
+      setPageItems(itemsByPage[itemId])
+    }
+  }
+
+  const handleSideBarClick = (itemId) => {
+    if (itemId) setContent(itemId)
+  }
+
+  const handleCreateClick = (page, content) => {
+
+  }
+
+  const handleSaveCars = (data) => {
+    // create new
+    const lastCar = cars[cars.length - 1]
+    let newId = lastCar.id + 1
+    let newCar = {
+      id: newId,
+      ...data,
+    }
+    setCars([
+      ...cars,
+      newCar
+    ])
   }
 
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Header handleClick={handleHeaderClick} />
+        <Header onClick={handleHeaderClick} />
       </div>
-      {/* <div className={styles.main}> */}
-      {/* MAIN */}
-      <div className={styles.sideBar}>SIDEBAR</div>
-      <div className={styles.content}>CONTENT
-        {/* <VehicleList vehicles={vehiclesData} /> */}
+      <div className={styles.sideBar}>
+        <SideBar page={page} items={pageItems} onClick={handleSideBarClick} />
       </div>
-      {/* </div> */}
+      <div className={styles.content}>
+        <Content
+          page={page}
+          content={content}
+          cars={cars}
+          onCreateClick={handleCreateClick}
+          onSave={handleSaveCars}
+        />
+      </div>
     </div>
   );
 }

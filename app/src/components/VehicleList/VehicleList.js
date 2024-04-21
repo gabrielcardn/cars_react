@@ -1,10 +1,8 @@
-
-// src/components/VehicleList.js
-import React from "react";
+import styles from "./VehicleList.module.css"
 
 const VehicleList = ({ vehicles }) => {
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Lista de Veículos</h2>
             <ul>
                 {vehicles.map(vehicle => (

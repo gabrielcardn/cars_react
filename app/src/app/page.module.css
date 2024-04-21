@@ -3,7 +3,7 @@
   width: 100%;
   display: grid;
   grid-template-rows: 50px auto;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 140px auto;
   /* Duas linhas de altura automática */
   grid-template-areas:
     "header header"
@@ -14,19 +14,15 @@
 }
 
 .header {
-  background-color: aqua;
   grid-row: 1;
   grid-area: header;
 }
 
-.main {
-  background-color: aquamarine;
-}
-
 .sideBar {
-  background-color: azure;
+  grid-row: 2;
 }
 
 .content {
-  background-color: beige;
+  grid-row: 2;
+  overflow: scroll;
 }
