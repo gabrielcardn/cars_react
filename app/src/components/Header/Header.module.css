@@ -1,5 +1,5 @@
 .container {
-    background-color: aqua;
+    background-color: #5c589c;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -7,13 +7,17 @@
 }
 
 .item {
-    background-color: blue;
+    background-color: #444283;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
 }
 
 .item:hover {
     filter: brightness(90%);
+    cursor: pointer;
 }

@@ -10,20 +10,17 @@ import carsData from "../contents/CarsContent/cars.json"
 const itemsByPage = {
   "home": [
     {
-      id: "item1",
-      title: "Item 1",
+      id: "challenge",
+      title: "Desafio",
     }, {
-      id: "item2",
-      title: "Item 2",
-    }, {
-      id: "item3",
-      title: "Item 3",
-    },
+      id: "decisions",
+      title: "Decisões",
+    }
   ],
   "cars": [
     {
-      id: "cars1",
-      title: "Carros 01"
+      id: "cars",
+      title: "Lista"
     }
   ]
 }
@@ -52,7 +49,16 @@ export default function Home() {
 
   }
 
-  const handleSaveCars = (data) => {
+  const handleSaveCars = (data, id) => {
+    if (id) {
+      let foundCarIndex = cars.findIndex(car => car.id === id)
+      if (foundCarIndex > -1) {
+        let carsClone = Object.assign([], cars)
+        carsClone[foundCarIndex] = data
+        setCars(carsClone)
+      }
+      return
+    }
     // create new
     const lastCar = cars[cars.length - 1]
     let newId = lastCar.id + 1

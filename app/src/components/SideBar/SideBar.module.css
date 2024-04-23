@@ -1,9 +1,11 @@
 .container {
     display: block;
+    font-weight: bold;
+    color: white;
 }
 
 .title {
-    background-color: rgb(68, 111, 112);
+    background-color:#5c589c;
     height: 100%;
     padding: 4px;
     display: flex;
@@ -26,7 +28,8 @@
     align-items: center;
     justify-content: center;
     padding-top: 4px;
-    background-color: cadetblue;
+    background-color: #746fb4;
+    cursor: pointer;
 }
 
 .item:hover {

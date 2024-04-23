@@ -9,12 +9,14 @@
     margin: 4px;
     border-radius: 6px;
     border: none;
-    color: white;
+    color: black;
     font-weight: bold;
-    background-color: grey;
+    font-size:medium;
+    background-color: #a39be5;
     flex: 0;
 }
 
 .button:hover {
     filter: brightness(90%);
+    cursor: pointer;
 }
