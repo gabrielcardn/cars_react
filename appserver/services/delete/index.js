@@ -1,11 +1,12 @@
-import { carsQuery } from "./cars/cars.js"
+import { carsRemove } from "./cars.js"
 
 
-export const query = async (page, params) => {
+export const remove = async (page, params) => {
+
     let data
     switch (page) {
         case "cars":
-            data = await carsQuery(params)
+            data = await carsRemove(params)
     }
 
     return {

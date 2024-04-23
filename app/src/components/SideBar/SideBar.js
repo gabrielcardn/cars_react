@@ -4,7 +4,6 @@ import styles from "./SideBar.module.css";
 
 
 const pagesTitle = {
-    "home": "Tela inicial",
     "cars": "Carros"
 }
 

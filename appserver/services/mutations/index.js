@@ -1,11 +1,12 @@
-import { carsQuery } from "./cars/cars.js"
+import { carsMutation } from "./cars.js"
 
 
-export const query = async (page, params) => {
+export const mutation = async (page, params, body) => {
+
     let data
     switch (page) {
         case "cars":
-            data = await carsQuery(params)
+            data = await carsMutation(params, body)
     }
 
     return {

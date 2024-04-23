@@ -1,11 +1,10 @@
 .container {
     display: block;
-    font-weight: bold;
-    color: white;
+    font-weight: bold;    
 }
 
 .title {
-    background-color:#5c589c;
+    background-color:#6495ED;
     height: 100%;
     padding: 4px;
     display: flex;
@@ -28,7 +27,8 @@
     align-items: center;
     justify-content: center;
     padding-top: 4px;
-    background-color: #746fb4;
+    background-color: #1E90FF;
+    border-top: 1px solid ;
     cursor: pointer;
 }
 

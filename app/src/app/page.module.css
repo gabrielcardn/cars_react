@@ -20,6 +20,7 @@
 
 .sideBar {
   grid-row: 2;
+  background-color: #4169E1;
 }
 
 .content {

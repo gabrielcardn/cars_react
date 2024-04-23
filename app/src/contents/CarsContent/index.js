@@ -1,15 +1,40 @@
-import CarsList from "@/components/CarsList/CarsList"
+"use client"
+import { useEffect, useState } from "react"
+
 import ContentHeader from "@/components/ContentHeader/ContentHeader"
-import { useState } from "react"
 import Modal from "@/components/Modal/Modal"
 import CarForm from "@/components/Form/CarForm"
+import CarsList from "@/components/CarsList/CarsList"
 
 
-const CarsContent = ({ page, content, cars, onSave }) => {
+const CarsContent = ({ page, content, onSave }) => {
     const [showModal, setShowModal] = useState(false)
     const [editingCar, setEditingCar] = useState(null)
+    const [carsData, setCarsData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [mutator, setMutator] = useState(null)
+
+    useEffect(() => {
+        setLoading(true)
+        fetch("http://localhost:3001/cars", {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => res.json()).then(d => {
+            console.log(d)
+            if (!d.status) throw new Error(d.message)
+            setCarsData(d.data)
+        });
+        setLoading(false)
+        setMutator(null)
+    }, [mutator])
+
+    if (loading) return <h1>Loading...</h1>
 
     const handleCreateClick = () => {
+        setEditingCar(null)
         setShowModal(true)
     }
 
@@ -18,14 +43,61 @@ const CarsContent = ({ page, content, cars, onSave }) => {
     }
 
     const handleFormSave = (data, id) => {
-        onSave(data, id)
+        console.log(data)
+        if (id) {
+            console.log(JSON.stringify(data))
+            fetch("http://localhost:3001/cars/?id=" + id, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(d => {
+                setMutator(d)
+            })
+        }
+
+        if (!id) {
+            fetch("http://localhost:3001/cars", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json()).then(d => {
+                setMutator(d)
+            })
+        }
+        // onSave(data, id)
         setShowModal(false)
     }
 
+    const handleFormDelete = (id) => {
+        fetch("http://localhost:3001/cars/?id=" + id, {
+            method: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(res => res.json()).then(d => {
+            setMutator(d)
+        })
+    }
+
     const handleCardClick = (cardId) => {
-        let foundCard = cars.find(car => car.id === cardId)
-        setEditingCar(foundCard)
-        setShowModal(true)
+        fetch("http://localhost:3001/cars/?id=" + cardId, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => res.json()).then(d => {
+            if (!d.status) throw new Error(d.message)
+            setEditingCar(d.data)
+            setShowModal(true)
+        })
     }
 
 
@@ -33,6 +105,7 @@ const CarsContent = ({ page, content, cars, onSave }) => {
         <CarForm
             onSave={handleFormSave}
             onCancel={handleCloseModal}
+            onDelete={handleFormDelete}
             editingCar={editingCar} />
     )
 
@@ -42,7 +115,7 @@ const CarsContent = ({ page, content, cars, onSave }) => {
             content={content}
             onCreateClick={handleCreateClick}
         />
-        <CarsList cars={cars} onCardClick={handleCardClick} />
+        <CarsList cars={carsData} onCardClick={handleCardClick} />
         {showModal ? <Modal onClose={handleCloseModal} >
             {form}
         </Modal> : null}

@@ -5,18 +5,8 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import SideBar from "@/components/SideBar/SideBar";
 import Content from "@/components/Content/Content";
-import carsData from "../contents/CarsContent/cars.json"
 
 const itemsByPage = {
-  "home": [
-    {
-      id: "challenge",
-      title: "Desafio",
-    }, {
-      id: "decisions",
-      title: "Decisões",
-    }
-  ],
   "cars": [
     {
       id: "cars",
@@ -26,11 +16,10 @@ const itemsByPage = {
 }
 
 export default function Home() {
-  const [page, setPage] = useState("home")
-  const [content, setContent] = useState(null)
+  const [page, setPage] = useState("cars")
+  const [content, setContent] = useState("cars")
   const [pageItems, setPageItems] = useState(itemsByPage[page])
   // TODO: MAKE PERSISTENCE ON SERVER
-  const [cars, setCars] = useState(carsData)
 
   const handleHeaderClick = (itemId) => {
     if (itemId) {
@@ -45,31 +34,12 @@ export default function Home() {
     if (itemId) setContent(itemId)
   }
 
-  const handleCreateClick = (page, content) => {
-
-  }
-
-  const handleSaveCars = (data, id) => {
+  const handleSaveCar = (data, id) => {
+    console.log("id: ", id)
     if (id) {
-      let foundCarIndex = cars.findIndex(car => car.id === id)
-      if (foundCarIndex > -1) {
-        let carsClone = Object.assign([], cars)
-        carsClone[foundCarIndex] = data
-        setCars(carsClone)
-      }
+      // EDIT ON CAR
       return
     }
-    // create new
-    const lastCar = cars[cars.length - 1]
-    let newId = lastCar.id + 1
-    let newCar = {
-      id: newId,
-      ...data,
-    }
-    setCars([
-      ...cars,
-      newCar
-    ])
   }
 
 
@@ -85,9 +55,7 @@ export default function Home() {
         <Content
           page={page}
           content={content}
-          cars={cars}
-          onCreateClick={handleCreateClick}
-          onSave={handleSaveCars}
+          onSave={handleSaveCar}
         />
       </div>
     </div>
