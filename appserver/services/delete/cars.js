@@ -17,6 +17,7 @@ export const carsRemove = async ({ id }) => {
     let foundCarIndex = data.findIndex(car => car.id === parseInt(id))
     if (foundCarIndex > -1) {
         data.splice(foundCarIndex, 1)
+        console.log(data)
         fs.writeFileSync(filePath, JSON.stringify(data))
     }
 

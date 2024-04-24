@@ -43,7 +43,6 @@ const CarsContent = ({ page, content, onSave }) => {
     }
 
     const handleFormSave = (data, id) => {
-        console.log(data)
         if (id) {
             console.log(JSON.stringify(data))
             fetch("http://localhost:3001/cars/?id=" + id, {
@@ -70,7 +69,6 @@ const CarsContent = ({ page, content, onSave }) => {
                 setMutator(d)
             })
         }
-        // onSave(data, id)
         setShowModal(false)
     }
 
@@ -82,8 +80,10 @@ const CarsContent = ({ page, content, onSave }) => {
                 'Content-Type': 'application/json',
             },
         }).then(res => res.json()).then(d => {
-            setMutator(d)
-        })
+            setMutator(d);
+        });
+
+        setShowModal(false);
     }
 
     const handleCardClick = (cardId) => {
