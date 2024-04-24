@@ -12,6 +12,7 @@ Este projeto consiste em uma aplicação web com uma tela de listagem de carros,
 
 Este projeto foi inicialmente concebido como uma máquina de estados para transitar entre telas, embora atualmente apresente apenas uma tela, a de listagem de carros.
 Na tela, todos os carros cadastrados são exibidos, agrupados por marca. Além disso, é possível criar novos carros, editar e excluir carros já existentes.
+A persistência do cadastro dos carros está sendo feita pela manipulação de um arquivo .json localizado em: /appserver/services/queries/cars/cars.json
 
 ## Tecnologias Utilizadas
 
