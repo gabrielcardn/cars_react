@@ -1,6 +1,6 @@
-# Listagem de carros
+# Lista de Carros
 
-Nesse projeto foi feito uma tela, com componente de listagem de carros e a possibilidade de criação, edição e deleção dos carros.
+Este projeto consiste em uma aplicação web com uma tela de listagem de carros, oferecendo funcionalidades de criação, edição e exclusão de carros.
 
 ## Índice
 
@@ -10,27 +10,38 @@ Nesse projeto foi feito uma tela, com componente de listagem de carros e a possi
 
 ## Sobre
 
-O projeto foi pensado para ser uma máquina de estados para transitar entre telas, porém no momento só possui uma tela (a de carros).
-Nele será listado todos os carros cadastrados agrupados por marca.
-E será possível criar novos carros, editar e deletar carros já criados.
+Este projeto foi inicialmente concebido como uma máquina de estados para transitar entre telas, embora atualmente apresente apenas uma tela, a de listagem de carros.
+Na tela, todos os carros cadastrados são exibidos, agrupados por marca. Além disso, é possível criar novos carros, editar e excluir carros já existentes.
 
 ## Tecnologias Utilizadas
 
-Foi usado para o servidor Node + Express, e no cliente NextJs com CSS Modules.
+Para o servidor, foi utilizado Node.js com Express, enquanto no cliente foi empregado Next.js com CSS Modules.
 
 ## Como Usar
 
-Inicialmente é necessário instalar as dependências do "app" e do "appserver".
-```
+Para começar, é necessário instalar as dependências tanto do aplicativo(/app) quanto do servidor(/appserver).
+
+```bash
 npm install
 ```
-Para executar é necessário fazer o "build" do app antes de iniciar.
-No /app:
-```
+
+Antes de iniciar, é necessário realizar o build do aplicativo.
+
+No diretório /app:
+
+```bash
 npm run build
 npm run start
 ```
-No /appserver:
-```
+
+No diretório /appserver:
+
+```bash
 npm run start
 ```
+
+Após acessar a tela de listagem de carros, você poderá:
+
+- Criar um novo carro clicando no botão "criar", preenchendo os campos do formulário e clicando em "salvar".
+- Editar um carro existente clicando no cartão referente ao carro na lista, alterando o(s) campo(s) no formulário e clicando em "salvar".
+- Deletar um carro clicando no cartão referente ao carro na lista, clicando em "deletar" e confirmando.
